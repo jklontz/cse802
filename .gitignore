@@ -1,3 +1,6 @@
+# Repository
+images/*
+
 # TeX
 *.aux
 *.bbl
