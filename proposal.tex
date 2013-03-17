@@ -25,11 +25,17 @@ Several databases have been collected for advancing the state-of-the-art in imag
 
 
 \section{Proposed Approach}
-We plan on experimenting with a variety of low-level feature representations including color \cite{sande10}, shape \cite{ahonen06}, and gradient information \cite{lowe04,dalal05}.
-These features will be pooled into local histograms to form our base descriptor.
-For this generic image classification task we are leaning in favor of skipping objected detection and localization all together and simply compute descriptors in a dense grid across the image at various scales.
-We anticipate experimenting with classic dimensionality reduction techniques such as PCA \cite{turk91} and LDA \cite{belhumeur97}.
-Provided the classifier is flexible enough, Spectral Hashing \cite{weiss2008} and Product Quantization \cite{jegou2011} appear to be promising recent approaches to dimensionality reduction.
+\begin{enumerate}
+
+\item We plan on experimenting with a variety of low-level feature representations including color \cite{sande10}, shape \cite{ahonen06}, and gradient information \cite{lowe04,dalal05}. These features will be pooled into local histograms to form our base descriptor.
+
+\item For this generic image classification task we are leaning in favor of skipping objected detection and localization all together and simply compute descriptors in a dense grid across the image at various scales.
+
+\item We anticipate experimenting with classic dimensionality reduction techniques such as PCA \cite{turk91} and LDA \cite{belhumeur97}.
+
+\item Provided the classifier is flexible enough, Spectral Hashing \cite{weiss2008} and Product Quantization \cite{jegou2011} appear to be promising recent approaches to dimensionality reduction.
+
+\end{enumerate}
 
 \bibliographystyle{plain}
 \bibliography{proposal}
