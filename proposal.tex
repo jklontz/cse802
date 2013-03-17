@@ -9,18 +9,24 @@
  
 \begin{document}
  
-\title{Final Project Proposal}
-\author{Sunpreet Arora \& Josh Klontz
-CSE 802}
+\title{CSE 802 - Final Project Proposal}
+\author{Sunpreet Arora \& Josh Klontz\\
+}
  
 \maketitle
 
-The objective of this project is to build an effective classifier for a twenty class subset of the ImageNet \cite{imagenet} database.
-The proposed classifier will seek to levereage a variety of modern pattern recognition techniques in order to maximize rank 5 accuracy.
+\section{Objective}
+The primary objective of this project is to build an effective classifier for a twenty class subset of the ImageNet \cite{imagenet} database. 
+The proposed classifier will seek to leverage a variety of modern pattern recognition techniques in order to maximize rank 5 accuracy.
 
-Image classification has a rich history as a field within computer science, and many datasets have been proposed for advancing the state of the art including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}.
+\section{Background}
+Automated image classification is one of the classical problems in the domain of computer vision and pattern recognition. Although several algorithms [] exist for categorizing images based on their distinct characteristics or features, large scale image classification is still considered a significantly challenging task. This is primarily because it becomes difficult to find a sufficiently distinctive set of features to distinguish between large number of image classes. Besides, the computational complexity of the classification task scales up considerably as well. 
 
-We plan on experimenting with a variety of low-level feature feature representations including color \cite{sande10}, shape \cite{ahonen06}, and gradient information \cite{lowe04,dalal05}.
+<<Add another paragraph about image net database and the state-of-the-art>>
+%, and many datasets have been proposed for advancing the state of the art including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}.
+
+\section{Proposed Approach}
+We plan on experimenting with a variety of low-level feature representations including color \cite{sande10}, shape \cite{ahonen06}, and gradient information \cite{lowe04,dalal05}.
 These features will be pooled into local histograms to form our base descriptor.
 For this generic image classification task we are leaning in favor of skipping objected detection and localization all together and simply compute descriptors in a dense grid across the image at various scales.
 We anticipate experimenting with classic dimensionality reduction techniques such as PCA \cite{turk91} and LDA \cite{belhumeur97}.
