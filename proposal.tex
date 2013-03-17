@@ -25,6 +25,19 @@ Several databases have been collected for advancing the state-of-the-art in imag
 
 
 \section{Proposed Approach}
+For a generic large scale image classification system, it is quite vital to find features which can efficiently distinguish between a large number of classes. In our view, such features should capture information at three different levels:
+
+\begin{itemize}
+\item \textit{Pixel level}: Features based on the pixel intensity values such as color can easily distinguish between several easy image categories such as apples and bananas.
+
+\item \textit{Neighborhood or Local level}: These features encompass information in a small local area around a point of interest, and therefore account for the local variations present in an image. Several image descriptors proposed in recent years such as SIFT [] and SURF[] belong to this class of features.
+
+\item \textit{Global level}: Besides capturing the information at a local level, it is also necessary to measure some global image properties. This is particularly useful to distinguish classes which have similar local variations, but where the global context is significantly different, such as water from sky. One such popular global descriptor to have come up in recent years is 
+GIST[].
+\end{itemize}
+
+<<Insert a connecting line between the two>>
+
 \begin{enumerate}
 
 \item We plan on experimenting with a variety of low-level feature representations including color \cite{sande10}, shape \cite{ahonen06}, and gradient information \cite{lowe04,dalal05}. These features will be pooled into local histograms to form our base descriptor.
