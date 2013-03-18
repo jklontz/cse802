@@ -16,12 +16,14 @@
 \maketitle
 
 \section{Objective}
-The primary objective of this project is to build an effective classifier for a twenty class subset of the ImageNet \cite{imagenet} database. 
-The proposed classifier will seek to leverage a variety of modern pattern recognition techniques in order to maximize rank 5 accuracy.
+The primary objective of this project is to build an effective classifier for a twenty class subset of the ImageNet \cite{imagenet} database. The proposed classifier will seek to leverage a variety of modern pattern recognition techniques in order to maximize rank 5 accuracy.
 
 \section{Background}
-Automated image classification is one of the classical problems in the domain of computer vision and pattern recognition. Although several algorithms [] exist for categorizing images based on their distinct characteristics or features, large scale image classification is still considered a significantly challenging task. This is primarily because it becomes difficult to find a sufficiently distinctive set of features to distinguish between large number of image classes. Besides, the computational complexity of the classification task scales up considerably as well.\\
-Several databases have been collected for advancing the state-of-the-art in image classification including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}. ImageNet\cite{imagenet} is one of the most recent large scale image databases with 10,000 image classes, and over a million images. Convolutional neural networks (CNNs) have been reported to give the best accuracy on the image net database [].
+Automated image classification is one of the classical problems in the domain of computer vision and pattern recognition. Although several algorithms exist for categorizing images based on their distinct characteristics or features, large scale image classification is still considered a significantly challenging task. This is primarily because it becomes difficult to find a sufficiently distinctive set of features to distinguish between large number of image classes. Besides, the computational complexity of the classification task scales up considerably as well.\\
+
+The most common approach to image classification is based on the popular information retrieval model known as the bag-of-words (BOW) model. A \textit{visual vocabulary} is first created based on features computed from the training images. The frequency of occurrence of these features (also referred to as \textit{visual words}) in the visual vocabulary is then used for classifying images from the test set.\\
+
+Several databases have been collected for advancing the state-of-the-art in image classification including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}. ImageNet\cite{imagenet} is one of the most recent large scale image databases with 10,000 image classes, and over a million images. Convolutional neural networks (CNNs) have been reported to give the best accuracy of around 85\% on the ImageNet database. However, they were implemented on massive parallel GPU's. Another effective approach with a reported accuracy of 74\% involves Fisher vectors [].
 
 
 \section{Methodology}
@@ -36,7 +38,7 @@ For a generic large scale image classification system, it is quite vital to find
 GIST[].
 \end{itemize}
 
-Driven by this idea, the brief overall plan is summarized as follows: 
+Driven by this idea as well as our analysis of the existing approaches, the brief overall plan is summarized as follows: 
 
 \begin{enumerate}
 
