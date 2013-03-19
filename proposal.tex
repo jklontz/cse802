@@ -21,7 +21,7 @@ The primary objective of this project is to build an effective classifier for a 
 \section{Background}
 Automated image classification is one of the classical problems in the domain of computer vision and pattern recognition. Although several algorithms exist for categorizing images based on their distinct characteristics or features, large scale image classification is still considered a significantly challenging task. This is primarily because it becomes difficult to find a sufficiently distinctive set of features to distinguish between large number of image classes. Besides, the computational complexity of the classification task scales up considerably as well.\\
 The most common approach to image classification is based on the popular information retrieval model known as the bag-of-words (BOW) model. A \textit{visual vocabulary} is first created based on features computed from the training images. The frequency of occurrence of these features (also referred to as \textit{visual words}) in the visual vocabulary is then used for classifying images from the test set.\\
-Several databases have been collected for advancing the state-of-the-art in image classification including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}. ImageNet\cite{imagenet} is one of the most recent large scale image databases with 10,000 image classes, and over a million images. Convolutional neural networks (CNNs) have been reported to give the best accuracy of around 85\% on the ImageNet database. However, they were implemented on massive parallel GPU's. Another effective approach with a reported accuracy of 74\% involves Fisher vectors [].
+Several databases have been collected for advancing the state-of-the-art in image classification including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}. ImageNet \cite{imagenet} is one of the most recent large scale image databases with 10,000 image classes, and over a million images. Convolutional neural networks (CNNs) have been reported to give the best rank-5 accuracy of around 85\% on the ImageNet database \cite{alex2012}. However, they were implemented on massive parallel GPU's. Another effective approach with a reported top-5 accuracy of 74\% involves Fisher vectors \cite{csurka2011fisher}.
 
 
 \section{Methodology}
@@ -33,7 +33,7 @@ For a generic large scale image classification system, it is quite vital to find
 \item \textit{Neighborhood or Local level}: These features encompass information in a small local area around a point of interest, and therefore account for the local variations present in an image. Several image descriptors proposed in recent years such as SIFT \cite{lowe04} and LBP \cite{ahonen06} belong to this class of features.
 
 \item \textit{Global level}: Besides capturing the information at a local level, it is also necessary to measure some global image properties. This is particularly useful to distinguish classes which have similar local variations, but where the global context is significantly different, such as water from sky. One such popular global descriptor to have come up in recent years is 
-GIST[].
+GIST \cite{oliva2001modeling}.
 \end{itemize}
 
 Driven by this idea as well as our analysis of the existing approaches, the brief overall plan is summarized as follows: 
@@ -44,11 +44,9 @@ Driven by this idea as well as our analysis of the existing approaches, the brie
 
 \item For this generic image classification task we are leaning in favor of skipping objected detection and localization all together and simply compute descriptors in a dense grid across the image at various scales.
 
-\item  We also plan to utilize ideas from the Fisher Vector approach in [] to combine both generative and discriminative models for the image classification task.
+\item  We also plan to utilize ideas from the Fisher Vector approach in \cite{csurka2011fisher} to combine both generative and discriminative models for the image classification task.
 
 \item We anticipate experimenting with classic dimensionality reduction techniques such as PCA \cite{turk91} and LDA \cite{belhumeur97}. Provided the classifier is flexible enough, Spectral Hashing \cite{weiss2008} and Product Quantization \cite{jegou2011} appear to be promising recent approaches to dimensionality reduction.
-
-
 
 \end{enumerate}
 
