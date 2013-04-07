@@ -8,3 +8,11 @@ images/*
 *.log
 *.pdf
 *.synctex.gz
+
+# Intermediate files
+scripts/*.arff
+scripts/*.csv
+scripts/*.R
+
+# OS X
+*.DS_Store
