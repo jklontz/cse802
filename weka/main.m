@@ -1,23 +1,24 @@
-% The main file
+clear all;
+clc;
 
-% The path of the WEKA jar
-weka_path = '.\';
+javaaddpath('weka.jar');
 
-% Add the weka jar to the classpath
-javaaddpath([weka_path 'weka.jar'],'-end');
+trainPath = 'descriptors.arff';
+% train = loadARFF(trainPath);
 
-% Import the necessities
-import weka.classifiers.Classifier.*
-import weka.classifiers.bayes.BayesNet.*
-import weka.classifiers.Evaluation.*
+% test = loadArff('testing.arff');
 
-% Classifier code
-v1 = java.lang.String('-t');
-v2 = java.lang.String([weka_path 'trainData.arff']);
+% Initialize the classifier
+classifierOptions = {'-D'};
+wekaClassifier = initWekaClassifier('bayes.NaiveBayes', classifierOptions);
+% nb = trainWekaClassifier(train,'bayes.NaiveBayes');
 
-v3 = java.lang.String('-T');
-v4 = java.lang.String([weka_path 'testData.arff']);
+% Initialize the evaluation class and evaluate the classifier
+evaluateOptions = {'-t',trainPath};
+s = weka.classifiers.Evaluation.evaluateModel(wekaClassifier,evaluateOptions);
 
-prm = cat(1,v1,v2,v3,v4);
+% Display the results
+disp(s);
 
-Evaluation.evaluateModel(javaObject('weka.classifiers.bayes.BayesNet'),prm);
+%Test the classifier
+% predicted = wekaClassify(test,wekaClassifier);
