@@ -8,8 +8,13 @@ validation
 *.bbl
 *.blg
 *.log
+*.nav
+*.out
 *.pdf
+*.snm
 *.synctex.gz
+*.toc
+*.vrb
 
 # Intermediate files
 scripts/*.arff
