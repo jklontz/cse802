@@ -40,7 +40,48 @@
 Does anybody need an introduction to Beamer? I don't think so.
 \end{block}
 \end{frame}
-%
+
+\begin{frame}
+\frametitle{Feature Descriptors}
+\begin{columns}
+\begin{column}{.3\textwidth}
+\begin{block}{SIFT}
+128 dimensions
+\begin{figure}
+\includegraphics[width=\textwidth]{SIFT}
+\end{figure}
+16 orientation histograms, 8 bins each.
+\end{block}
+\end{column}
+\pause
+\begin{column}{.3\textwidth}
+\begin{block}{LBP}
+59 dimensions
+\begin{figure}
+\includegraphics[width=\textwidth]{LBPSimple}
+\end{figure}
+\begin{figure}
+\includegraphics[width=\textwidth]{LBPU2}
+\end{figure}
+Compute histogram of the 59 ``U2'' patterns.
+\end{block}
+\end{column}
+\pause
+\begin{column}{.3\textwidth}
+\begin{block}{RG}
+64 dimensions
+\begin{equation}
+\begin{split}
+R &= \frac{r}{r+g+b} \\
+G &= \frac{g}{r+g+b} \\
+\end{split}
+\end{equation}
+$R$ and $G$ each quantized into 32-bin histogram.
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+
 \begin{frame}
 \frametitle{Multi-Scale Dense Feature Extraction}
 \begin{columns}
