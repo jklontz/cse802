@@ -148,12 +148,44 @@ $R$ and $G$ each quantized into 32-bin histogram.
 
 % % % % % Classification slides % % % % % % % 
 \begin{frame}
-\frametitle{Classification}
+\frametitle{Classifiers}
 \begin{itemize}
-\item Initial experiments \textit{(5 fold cross validation on the training data)}
+\item<1-3> Train three different SVM classifiers for each of the codebooks.\\
+\item<2-3> Linear kernel does not work very well because the classes are not well separable in the feature space.\\
+\item<3> Need to map the data to a higher dimensional space: \textbf{RBF kernel}.\\
+\end{itemize}
+\begin{figure}
+\includegraphics[width = 0.7\textwidth, height = 0.5\textheight]{svm}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Parameter Selection}
 \begin{itemize}
-\item \textbf{Nearest Neighbor classifier}: Top-5 accuracy $~66\%$.
-\item \textbf{Adaboost with Decision Stumps}: Top-5 accuracy $~78\%$.
+\item<1-3> Effectiveness of SVM classifiers depends on the selection of the right set of parameters.
+\item<2-3> Two different parameters for RBF-SVM: \textbf{soft margin parameter C} and \textbf{kernel width G}.
+\item<3> Used coarse-to-fine grid search for selecting the optimum set of parameters.
+\end{itemize}
+\begin{figure}
+\includegraphics[width = 0.6\textwidth, height =0.4\textheight]{gridsearch}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Classifier Combination}
+\begin{figure}
+\includegraphics[width = 1\textwidth]{classifiercombination}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Results}
+\begin{itemize}
+\item Top-5 accuracy:
+\begin{itemize}
+\item \textbf{Training Set}: \%
+\item \textbf{Validation Set}: 88.55\%
+\item \textbf{Test Set}: 88.94\%
 \end{itemize}
 \end{itemize}
 \end{frame}

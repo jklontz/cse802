@@ -1,6 +1,7 @@
 # Repository
 test
 validation
+training
 
 # TeX
 *.aux
@@ -9,7 +10,7 @@ validation
 *.log
 *.nav
 *.out
-*.pdf
+#*.pdf
 *.snm
 *.synctex.gz
 *.toc
