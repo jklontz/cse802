@@ -29,45 +29,62 @@
 %
 \begin{document}
 %
+\graphicspath{{images/}}
+
 \begin{frame}
 \titlepage
 \end{frame}
 %
 \begin{frame}
-\frametitle{Challenge}
+\frametitle{Challenges}
 \begin{columns}
 \begin{column}{.3\textwidth}
-\begin{block}{The Bad News}
 \begin{itemize}
-\item Intraclass variation
-\item Scale
-\item Pose
-\item Illumination
-\item Occlusion
-\item Clutter
+\item<1-7> Intraclass variation
+\item<2-7> Interclass similarity
+\item<3-7> Scale
+\item<4-7> Pose
+\item<5-7> Illumination
+\item<6-7> Occlusion
+\item<7> Clutter
 \end{itemize}
-\end{block}
-\begin{block}{The Good News}
-\begin{itemize}
-\item Ample training data
-\item Rank-5 (of 20)
-\end{itemize}
-\end{block}
 \end{column}
 \begin{column}{.3\textwidth}
 \begin{figure}
-\includegraphics[width=\textwidth]{n02951358_94}
-\caption{``canoe''}
+\includegraphics<1>[width=\textwidth]{chime1}
+\includegraphics<2>[width=\textwidth]{spatula1}
+\includegraphics<3>[width=\textwidth]{canoe1}
+\includegraphics<4>[width=\textwidth]{hatchet1}
+\includegraphics<5>[width=\textwidth]{cleaver2}
+\includegraphics<6>[width=\textwidth]{pdrill1}
+\includegraphics<7>[width=\textwidth]{cleaver1}
 \end{figure}
 \end{column}
 \begin{column}{.3\textwidth}
 \begin{figure}
-\includegraphics[width=\textwidth]{n02951358_588}
-\caption{``canoe''}
+\includegraphics<1>[width=\textwidth]{chime2}
+\includegraphics<2>[width=\textwidth]{ladle1}
+\includegraphics<3>[width=\textwidth]{canoe2}
+\includegraphics<4>[width=\textwidth]{hatchet2}
+\includegraphics<5>[width=\textwidth]{cleaver3}
+\includegraphics<6>[width=\textwidth]{spatula2}
+\includegraphics<7>[width=\textwidth]{spatula3}
 \end{figure}
 \end{column}
 \end{columns}
 \end{frame}
+
+% % % % Methodology % % % % %
+\begin{frame}
+\frametitle{Methodology}
+%\begin{itemize}
+
+
+%\end{itemize}
+\end{frame}
+
+% % % % % % % % % % % % % % % % 
+
 
 \begin{frame}
 \frametitle{Feature Descriptors}
@@ -129,6 +146,14 @@ $R$ and $G$ each quantized into 32-bin histogram.
 \end{columns}
 \end{frame}
 %
+
+% % % % % Classification slides % % % % % % % 
+\begin{frame}
+\frametitle{Classification}
+
+\end{frame}
+% % % % % % % % % % % % % % % % % % % % % % %
+
 \begin{frame}[fragile] % Notice the [fragile] option %
 \frametitle{Verbatim}
 \begin{example}[Putting Verbatim]
