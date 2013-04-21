@@ -77,10 +77,9 @@
 % % % % Methodology % % % % %
 \begin{frame}
 \frametitle{Methodology}
-%\begin{itemize}
-
-
-%\end{itemize}
+\begin{figure}
+\includegraphics[width=1\textwidth]{flowchart}
+\end{figure}
 \end{frame}
 
 % % % % % % % % % % % % % % % % 
@@ -150,7 +149,13 @@ $R$ and $G$ each quantized into 32-bin histogram.
 % % % % % Classification slides % % % % % % % 
 \begin{frame}
 \frametitle{Classification}
-
+\begin{itemize}
+\item Initial experiments \textit{(5 fold cross validation on the training data)}
+\begin{itemize}
+\item \textbf{Nearest Neighbor classifier}: Top-5 accuracy $~66\%$.
+\item \textbf{Adaboost with Decision Stumps}: Top-5 accuracy $~78\%$.
+\end{itemize}
+\end{itemize}
 \end{frame}
 % % % % % % % % % % % % % % % % % % % % % % %
 
