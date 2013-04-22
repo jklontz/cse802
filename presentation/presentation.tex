@@ -30,6 +30,7 @@
 \begin{document}
 %
 \graphicspath{{images/}}
+\setbeamertemplate{caption}{\insertcaption}
 
 \begin{frame}
 \titlepage
@@ -181,13 +182,52 @@ $R$ and $G$ each quantized into 32-bin histogram.
 \begin{frame}
 \frametitle{Results}
 \begin{itemize}
-\item Top-5 accuracy:
+\item<1-3> Classes where the approach really works well: \textit{odometer, rapeseed, website}.
+\item<2-3> Classes where the approach does not work very well: \textit{lopener, hatchet, cleaver}.
+\item<3> Top-5 accuracy:
 \begin{itemize}
-\item \textbf{Training Set}: \%
+\item \textbf{Training Set}: 99.99\%
 \item \textbf{Validation Set}: 88.55\%
 \item \textbf{Test Set}: 88.94\%
 \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Success}
+
+\only<1>{
+\begin{figure}
+\includegraphics[width =0.4\textwidth, height =0.5\textheight]{success1}
+\caption{\textbraceleft'odometer','spatula','gondola','hook','elocomotive'\textbraceright}
+\end{figure}
+}
+
+\only<2>{
+\begin{figure}
+\includegraphics[width =0.4\textwidth, height =0.5\textheight]{success2}
+\caption{\textbraceleft'yflower','daisy','flamingo','ladle','plunger'\textbraceright}
+\end{figure}
+}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Failure}
+
+\only<1>{
+\begin{figure}
+\includegraphics[width =0.4\textwidth, height =0.5\textheight]{failure1}
+\caption{\textbraceleft'plunger','ladle','spatula','hook','cleaver'\textbraceright}
+\end{figure}
+}
+
+\only<2>{
+\begin{figure}
+\includegraphics[width =0.4\textwidth, height =0.5\textheight]{failure2}
+\caption{\textbraceleft'odometer','daisy','flamingo','ladle','spatula'\textbraceright}
+\end{figure}
+}
 \end{frame}
 % % % % % % % % % % % % % % % % % % % % % % %
 
