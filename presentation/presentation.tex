@@ -182,15 +182,32 @@ $R$ and $G$ each quantized into 32-bin histogram.
 \begin{frame}
 \frametitle{Results}
 \begin{itemize}
-\item<1-3> Classes where the approach really works well: \textit{odometer, rapeseed, website}.
-\item<2-3> Classes where the approach does not work very well: \textit{lopener, hatchet, cleaver}.
-\item<3> Top-5 accuracy:
+\item<1-3> Top-5 accuracy:
 \begin{itemize}
 \item \textbf{Training Set}: 99.99\%
 \item \textbf{Validation Set}: 88.55\%
 \item \textbf{Test Set}: 88.94\%
 \end{itemize}
+\item<2-3> Classes where the approach really works well: \textit{odometer, rapeseed, website}.
+\item<3> Classes where the approach does not work very well: \textit{lopener, hatchet, cleaver}.
 \end{itemize}
+
+\begin{center}
+\begin{tabular}[]{| c | c | c | }
+\hline
+\multicolumn{2}{|c|}{\textbf{Validation Set Accuracy} (\%)} \\
+\hline
+SIFT & 81.55\\
+\hline
+LBP & 82.6\\
+\hline
+Color & 77.58\\
+\hline
+All & \textbf{88.55}\\
+\hline
+\end{tabular}
+\end{center}
+
 \end{frame}
 
 \begin{frame}
