@@ -3,9 +3,11 @@
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb}
 \usepackage[lofdepth,lotdepth]{subfig}
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{tikz}
+\usepackage{caption}
 \usetikzlibrary{arrows,shapes,trees} % loads some tikz extensions
  
 \begin{document}
@@ -25,7 +27,7 @@ The scope of this project however is limited to classifying a subset of 20 class
 
 \section{Challenges}
 Even though we are working with a subset of 20 distinct image classes from ImageNet, image classification is still very challenging. Some of the major challenging aspects are briefly discussed below:
-\begin{enumerate}
+\begin{itemize}
 \item \textit{Intraclass Variability}: Since ImageNet database is organized in a semantic hierarchy, exemplars from the same image class exhibit a considerable amount of variation or \textit{intraclass variability} amongst themselves. For example, both a gong and a wind chime belong to the semantic category (Figure \ref{fig1:subfig1}).
 \item \textit{Interclass Similarity}: Similarly, exemplars from different classes such as spatula and ladle look visually similar to each other, or in other words exhibit \textit{interclass similarity} (Figure \ref{fig1:subfig2}).
 \item \textit{Scale}: The object of interest is present at different scales in different exemplar images for each class (Figure \ref{fig1:subfig3}).
@@ -33,7 +35,7 @@ Even though we are working with a subset of 20 distinct image classes from Image
 \item \textit{Illumination}: The database contains images acquired from a lot of different sources with differing illumination conditions.
 \item \textit{Occlusion}: Sometimes the object of interest is occluded by another object in the image, thereby reducing the amount of useful information content for the classification task (Figure \ref{fig1:subfig4}).
 \item \textit{Clutter}: There is a lot of background clutter in some of the exemplar images, or in other words there is more useless information present in the image than the useful one for the purpose of image classification.
-\end{enumerate}
+\end{itemize}
 
 \begin{figure}
 \centering
@@ -82,13 +84,26 @@ It is quite vital to represent images in terms of features which can sufficientl
 
 \end{itemize}
 
+\begin{figure}
+\centering
+\subfloat[Dense feature extraction]{
+\includegraphics[width = 0.4\textwidth, height = 0.25\textheight]{dog_intdet}
+\label{fig1:subfig5}
+}
+\subfloat[Visual codebook generation]{
+\includegraphics[width = 0.4\textwidth, height = 0.25\textheight]{dog_quantized}
+}
+\caption{Illustrating the dense feature extraction and the codebook generation process.}
+\end{figure}
+
+
 \subsection{Multi-scale dense feature extraction}
 
 
 \subsection{Visual codebook generation}
 
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width = 0.5\textwidth, height =0.2\textheight]{gridsearch}
 \caption{Coarse-to-fine grid search for RBF-SVM optimum parameters}
@@ -100,7 +115,6 @@ The final step in the proposed paradigm involves training classifiers based on t
 
 \subsubsection{Choice of Classifiers}
 We initially experimented with using the nearest neighbor classifier as well as using boosted decision stumps. The rank-5 accuracies using the SIFT codebook (5-fold cross validation on the training data) were around 66\% and 78\% respectively for these classifiers. Radial basis Support Vector Machines (RBF-SVMs) outperformed all other classifiers in our initial set of experiments and therefore we settled with using them as the base classifiers. In the proposed classification framework, three different Radial basis Support Vector Machines (RBF-SVMs) are trained for each of the three different visual codebooks.
-
 
 \subsubsection{Parameter Selection}
 Effectiveness of SVM classifiers depends on the selection of the right set of parameters. There are two different parameters for RBF-SVM namely the soft margin parameter $C$ and the kernel width $G$. For obtaining the optimum set of parameters, we do a coarse-to-fine grid search over the 2-dimensional space of $C$ and $G$ as shown in Figure \ref{fig:gridsearch}. Basically, this involves optimizing the 5-fold cross validation accuracies on the training set over a grid of coarse combinations of parameters $C$'s and $G$'s, and then fine tuning the parameters by doing a finer search inside the coarser grid.
@@ -115,7 +129,35 @@ Effectiveness of SVM classifiers depends on the selection of the right set of pa
 Since the three non-linear SVM classifiers are trained on the three different visual codebooks corresponding to multiscale SIFT, LBP and Color features, they work on features which capture different type of information content from an image. Assuming that the classifiers are independent is a safe assumption in such a scenario. We therefore fuse the classifiers using the product fusion rule as shown in Figure \ref{fig:classifiercombination}. Each classifier independently outputs the probability of the test sample belonging to each of the different classes. The probability values corresponding to each of the classes are multiplied together to yield the final probability estimate. These estimates are then sorted in a descending order to get the top-5 class labels for the test sample.
 
 \section{Results}
+\begin{itemize}
+\item Top-5 accuracy:
+\begin{itemize}
+\item \textbf{Training Set}: 99.99\%
+\item \textbf{Validation Set}: 88.55\%
+\item \textbf{Test Set}: 88.94\%
+\end{itemize}
+\item Classes where the approach really works well: \textit{odometer, rapeseed, website}.
+\item Classes where the approach does not work very well: \textit{lopener, hatchet, cleaver}.
+\end{itemize}
 
+\begin{center}
+\begin{tabular}[]{| c | c | c | }
+\hline
+\multicolumn{2}{|c|}{\textbf{Classification Accuracy} (\%)} \\
+\hline
+SIFT & 81.55\\
+\hline
+LBP & 82.6\\
+\hline
+Color & 77.58\\
+\hline
+SIFT + LBP & 84.6\\
+\hline
+SIFT + LBP + Color & \textbf{88.55}\\
+\hline
+\end{tabular}
+\captionof{table}{Classification accuracy of the proposed approach on the validation set.}
+\end{center}
 
 \bibliographystyle{plain}
 \bibliography{report}
