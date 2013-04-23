@@ -19,10 +19,19 @@
 Automated image classification is one of the classical problems in the domain of computer vision and pattern recognition. Although several algorithms exist for categorizing images based on their distinct characteristics or features, large scale image classification is still considered a significantly challenging task. This is primarily because it becomes difficult to find a sufficiently distinctive set of features to distinguish between large number of image classes. Besides, the computational complexity of the classification task scales up considerably as well.\\
 The most common approach to image classification is based on the popular information retrieval model known as the bag-of-words (BOW) model. A \textit{visual vocabulary} is first created based on features computed from the training images. The frequency of occurrence of these features (also referred to as \textit{visual words}) in the visual vocabulary is then used for classifying images from the test set.\\
 Several databases have been collected for advancing the state-of-the-art in image classification including Caltech 101 \cite{caltech101}, and PASCAL VOC \cite{pascal09}. ImageNet \cite{imagenet} is one of the most recent large scale image databases with 10,000 image classes, and over a million images. Convolutional neural networks (CNNs) have been reported to give the best rank-5 accuracy of around 85\% on the ImageNet database \cite{alex2012}. However, they were implemented on massive parallel GPU's. Another effective approach with a reported top-5 accuracy of 74\% involves Fisher vectors \cite{csurka2011fisher}.\\
-The scope of this project however is limited to classifying a subset of 20 classes (10 hardest and 10 easiest) from the ImageNet database. We are given about ~20000 images for training, ~1000 images for validation and ~5000 images for testing. The aim is to come up with a classification framework to maximize the rank-5 accuracy.
+The scope of this project however is limited to classifying a subset of 20 classes (10 hardest and 10 easiest) from the ImageNet database. We are given about 20000 images for training, 1000 images for validation and 5000 images for testing. The aim is to come up with a classification framework to maximize the rank-5 accuracy.
 
 \section{Challenges}
-
+Even though we are working with a subset of 20 distinct image classes from ImageNet, image classification is still very challenging. Some of the major challenging aspects are briefly discussed below:
+\begin{enumerate}
+\item \textit{Intraclass Variability}: Since ImageNet database is organized in a semantic hierarchy, exemplars from the same image class exhibit a considerable amount of variation or \textit{intraclass variability} amongst themselves. For example, both a gong and a wind chime belong to the semantic category chime.
+\item \textit{Interclass Similarity}: Similarly, exemplars from different classes such as spatula and ladle look visually similar to each other, or in other words exhibit \textit{interclass similarity}.
+\item \textit{Scale}: The object of interest is present at different scales in different exemplar images for each class.
+\item \textit{Pose}: Variations in pose of the object of interest are also observed amongst different exemplar images.
+\item \textit{Illumination}: The database contains images acquired from a lot of different sources with differing illumination conditions.
+\item \textit{Occlusion}: Sometimes the object of interest is occluded by another object in the image, thereby reducing the amount of useful information content for the classification task.
+\item \textit{Clutter}: There is a lot of background clutter in some of the exemplar images, or in other words there is more useless information present in the image than the useful one for the purpose of image classification.
+\end{enumerate}
 
 
 \bibliographystyle{plain}
