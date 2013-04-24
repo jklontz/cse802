@@ -204,13 +204,19 @@ Experimentation with different values of $k$ suggested that $k=1024$ was a good 
 Figure \ref{fig:codebook} illustrates the dense feature extraction and codebook generation steps. 
 
 \subsection{Classification}
-The final step in the proposed paradigm involves training classifiers based on the generated visual codebooks, and then using them to predict test samples. However, there are many considerations within this step including the choice of classifiers as well the combination of classifiers.
+The final step in the proposed paradigm involves training classifiers based on the generated visual codebooks, and then using them to predict test samples.
+There are many considerations within this step including the choice of classifiers, parameter tuning, and the combination of classifiers.
 
 \subsubsection{Choice of Classifiers}
-We initially experimented with using the nearest neighbor classifier as well as using boosted decision stumps. The rank-5 accuracies using the SIFT codebook (5-fold cross validation on the training data) were around 66\% and 78\% respectively for these classifiers. Radial basis Support Vector Machines (RBF-SVMs) outperformed all other classifiers in our initial set of experiments and therefore we settled with using them as the base classifiers. In the proposed classification framework, three different Radial basis Support Vector Machines (RBF-SVMs) are trained for each of the three different visual codebooks.
+We initially experimented with using the nearest neighbor classifier as well as using boosted decision stumps.
+The rank-5 accuracies using the SIFT codebook (5-fold cross validation on the training data) were around 66\% and 78\% respectively for these classifiers.
+Radial basis Support Vector Machines (RBF-SVMs) outperformed all other classifiers in our initial set of experiments and we therefore opted to use them as the base classifier for each of three different visual codebooks.
 
 \subsubsection{Parameter Selection}
-Effectiveness of SVM classifiers depends on the selection of the right set of parameters. There are two different parameters for RBF-SVM namely the soft margin parameter $C$ and the kernel width $G$. For obtaining the optimum set of parameters, we do a coarse-to-fine grid search over the 2-dimensional space of $C$ and $G$ as shown in Figure \ref{fig:gridsearch}. Basically, this involves optimizing the 5-fold cross validation accuracies on the training set over a grid of coarse combinations of parameters $C$'s and $G$'s, and then fine tuning the parameters by doing a finer search inside the coarser grid.
+Effectiveness of SVM classifiers depends on the selection of the right set of parameters.
+There are two different parameters for RBF-SVM namely the soft margin parameter $C$ and the kernel width $G$.
+To obtain the optimum set of parameters, we do a coarse-to-fine grid search over the 2-dimensional space of $C$ and $G$ as shown in Figure \ref{fig:gridsearch}.
+This involves optimizing the 5-fold cross validation accuracies on the training set over a grid of coarse combinations of parameters $C$'s and $G$'s, and then fine tuning the parameters by doing a finer search inside the coarser grid.
 
 \begin{figure}
 \centering
@@ -220,7 +226,12 @@ Effectiveness of SVM classifiers depends on the selection of the right set of pa
 \end{figure}
 
 \subsubsection{Classifier Combination}
-Since the three non-linear SVM classifiers are trained on the three different visual codebooks corresponding to multiscale SIFT, LBP and Color features, they work on features which capture different type of information content from an image. Assuming that the classifiers are independent is a safe assumption in such a scenario. We therefore fuse the classifiers using the product fusion rule as shown in Figure \ref{fig:classifiercombination}. Each classifier independently outputs the probability of the test sample belonging to each of the different classes. The probability values corresponding to each of the classes are multiplied together to yield the final probability estimate. These estimates are then sorted in a descending order to get the top-5 class labels for the test sample.
+Since the three non-linear SVM classifiers are trained on the three different visual codebooks corresponding to multiscale SIFT, LBP and Color features, they work on features which capture different types of information content from an image.
+Therefore, assuming that the classifiers are independent is a reasonable assumption in this scenario.
+Motivated by the notion of independence, fuse the classifiers using the product fusion rule, as shown in Figure \ref{fig:classifiercombination}.
+Each classifier independently outputs the probability of the test sample belonging to each of the different classes.
+The probability values corresponding to each of the classes are multiplied together to yield the final probability estimate.
+These estimates are then sorted in a descending order to get the top-5 class labels for the test sample.
 
 \begin{figure}
 \includegraphics[width = 1\textwidth]{classifiercombination}
@@ -229,6 +240,8 @@ Since the three non-linear SVM classifiers are trained on the three different vi
 \end{figure}
 
 \section{Results}
+The following statistics show the accuracy of the method described above. Overall we were able to achieve 89\% rank-5 accuracy on the problem.
+
 \begin{itemize}
 \item Top-5 accuracy:
 \begin{itemize}
