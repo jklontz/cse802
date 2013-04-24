@@ -116,7 +116,10 @@ The correct classes in this example are cleaver and spatula.
 \end{figure}
 
 \section{Classification Framework}
-For the given classification task, we propose a three stage framework based on the Bag of Words(BOW) model. The first step comprises of densely sampling different types of features at multiple scales and generating the \textit{visual vocabulary}. This is followed by doing k-means clustering for creating the \textit{visual codebook} for each distinct feature. This is analogous to the Bag of Words (BOW) model quite popular in the information retrieval domain. Finally, non-linear support vector machines are trained on each codebook, and their prediction outputs combined to generate the class labels.
+For the given classification task, we propose a three stage framework based on the bag-of-words (BOW) model.
+The first step comprises of densely sampling three different types of features at multiple scales and generating a \textit{visual vocabulary} for each feature type.
+K-means clustering is then applied to create a \textit{visual codebook} for each distinct feature type.
+Finally, radial basis function (RBF) support vector machines (SVM) are trained on each codebook, and their prediction outputs are combined to generate the class labels.
 
 \subsection{Feature Descriptors}
 It is quite vital to represent images in terms of features which can sufficiently distinguish between different classes for the purpose of image classification. In our approach we use three different types of descriptors based on the type of information they capture from an image:
