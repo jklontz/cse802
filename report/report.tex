@@ -40,8 +40,9 @@ We are given about 20000 images for training, 1000 images for validation and 500
 The objective is to come up with a classification framework that maximizes rank-5 accuracy.
 
 \section{Challenges}
+\label{sec:challenges}
 Despite working on a 20 class subset of ImageNet, the classification problem is still very challenging.
-Some of the most challenging aspects are briefly discussed below.
+Some of the most challenging aspects are discussed below:
 
 \begin{itemize}
 \item \textit{Intraclass Variability}:
@@ -122,43 +123,85 @@ K-means clustering is then applied to create a \textit{visual codebook} for each
 Finally, radial basis function (RBF) support vector machines (SVM) are trained on each codebook, and their prediction outputs are combined to generate the class labels.
 
 \subsection{Feature Descriptors}
-It is quite vital to represent images in terms of features which can sufficiently distinguish between different classes for the purpose of image classification. In our approach we use three different types of descriptors based on the type of information they capture from an image:
+Recall that the fundamental objective is to represent images in terms of features which can sufficiently distinguish between different classes for the purpose of image classification.
+Given the challenges discussed in section \ref{sec:challenges}, it seems likely that no single feature descriptor can adaquately distinguish between all of the classes.
+Therefore, in our approach we use three distinct descriptors that capture different information in the image:
 
 \begin{itemize}
-
 \item \textit{Scale Invariant Feature Transform (SIFT)}:
+SIFT \cite{lowe04} is a 128 dimensional descriptor comprised of 16 8-bin weighted and normalized histograms of oriented gradients.
+Figure \ref{fig:SIFT} illustrates the layout of the descriptor.
+SIFT has been used successfully in a wide variety of image retrieval tasks since its introduction over a decade ago.
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.5\textwidth]{SIFT}
+\caption{Visualization of the SIFT descriptor.}
+\label{fig:SIFT}
+\end{figure}
 
 \item \textit{Local Binary Patterns (LBP)}:
+LBP \cite{ahonen06} is a 59 dimensional histogram where each bin represents a distinct local pattern.
+LBP is first computed by thresholding adjacent pixels to generate an 8-bit pattern as shown in figure \ref{fig:lbp}.
+Figure \ref{fig:lbpu2} illustrates the next step which is to discard all but the unform patterns and reduce the possible number of patterns from 256 to 59.
+As a final step, a historgram is computed over a local region to generate the descriptor.
+This representation has proven especially popular in the face recognition community.
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.5\textwidth]{LBPSimple}
+\caption{Every value is compared against the center to generate an 8-bit local binary pattern.}
+\label{fig:lbp}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.5\textwidth]{LBPU2}
+\caption{
+The first row shows some of the possible 58 uniform LBP patterns with zero or two transitions between a 0 and a 1 bit.
+The bottom row shows some of the 198 possible non-uniform patters that all get mapped to the 59th $LBP^{U2}$ pattern.
+}
+\label{fig:lbpu2}
+\end{figure}
 
 \item \textit{Color}:
-
+Visual inspection of the training images suggests color can also be used for identifying some classes.
+In this case we chose to use the \emph{RG} color space described in \cite{sande10} due to it's accuracy in image retrieval tasks.
+Equation \ref{eq:rg} shows how this normalized color space is computed.
+\begin{equation}
+\begin{split}
+R &= \frac{r}{r+g+b} \\
+G &= \frac{g}{r+g+b} \\
+\end{split}
+\label{eq:rg}
+\end{equation}
+In our implementation we chose to quantized $R$ and $G$ into 32-bin histograms to generate a 64 dimensional color desciptor.
 \end{itemize}
 
 \begin{figure}
 \centering
 \subfloat[Dense feature extraction]{
 \includegraphics[width = 0.4\textwidth, height = 0.25\textheight]{dog_intdet}
-\label{fig1:subfig5}
 }
 \subfloat[Visual codebook generation]{
 \includegraphics[width = 0.4\textwidth, height = 0.25\textheight]{dog_quantized}
 }
-\caption{Illustrating the dense feature extraction and the codebook generation process.}
+\caption{
+Illustration of the dense feature extraction and the codebook generation process.
+Features are first extracted at over a dense grid at several resolutions.
+They are then clustered and represented in a 1024-word codebook.}
+\label{fig:codebook}
 \end{figure}
-
 
 \subsection{Multi-scale dense feature extraction}
-
+The object of interest in an image can occur at a varying scale, therefore we extract descriptors at three resolutions in an attept to remain invariant scale.
+In particular, each descriptor is extracted in a 15x15, 10x10, and 5x5 grid.
+Since all of the descriptors are histograms, they are normalized to unit $L_1$ norm so that descriptors extracted from different resolutions can be compared and clustered in the same feature space.
 
 \subsection{Visual codebook generation}
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[width = 0.5\textwidth, height =0.2\textheight]{gridsearch}
-\caption{Coarse-to-fine grid search for RBF-SVM optimum parameters}
-\label{fig:gridsearch}
-\end{figure}
+For each dense descriptor type, we run k-means three times and pick the cluster centers from the run with the lowest entropy.
+Experimentation with different values of $k$ suggested that $k=1024$ was a good choice for our problem.
+Figure \ref{fig:codebook} illustrates the dense feature extraction and codebook generation steps. 
 
 \subsection{Classification}
 The final step in the proposed paradigm involves training classifiers based on the generated visual codebooks, and then using them to predict test samples. However, there are many considerations within this step including the choice of classifiers as well the combination of classifiers.
@@ -170,13 +213,20 @@ We initially experimented with using the nearest neighbor classifier as well as 
 Effectiveness of SVM classifiers depends on the selection of the right set of parameters. There are two different parameters for RBF-SVM namely the soft margin parameter $C$ and the kernel width $G$. For obtaining the optimum set of parameters, we do a coarse-to-fine grid search over the 2-dimensional space of $C$ and $G$ as shown in Figure \ref{fig:gridsearch}. Basically, this involves optimizing the 5-fold cross validation accuracies on the training set over a grid of coarse combinations of parameters $C$'s and $G$'s, and then fine tuning the parameters by doing a finer search inside the coarser grid.
 
 \begin{figure}
-\includegraphics[width = 1\textwidth]{classifiercombination}
-\caption{Classifier Combination using Product Fusion}
-\label{fig:classifiercombination}
+\centering
+\includegraphics[width = 0.5\textwidth, height =0.2\textheight]{gridsearch}
+\caption{Coarse-to-fine grid search for RBF-SVM optimum parameters}
+\label{fig:gridsearch}
 \end{figure}
 
 \subsubsection{Classifier Combination}
 Since the three non-linear SVM classifiers are trained on the three different visual codebooks corresponding to multiscale SIFT, LBP and Color features, they work on features which capture different type of information content from an image. Assuming that the classifiers are independent is a safe assumption in such a scenario. We therefore fuse the classifiers using the product fusion rule as shown in Figure \ref{fig:classifiercombination}. Each classifier independently outputs the probability of the test sample belonging to each of the different classes. The probability values corresponding to each of the classes are multiplied together to yield the final probability estimate. These estimates are then sorted in a descending order to get the top-5 class labels for the test sample.
+
+\begin{figure}
+\includegraphics[width = 1\textwidth]{classifiercombination}
+\caption{Classifier Combination using Product Fusion}
+\label{fig:classifiercombination}
+\end{figure}
 
 \section{Results}
 \begin{itemize}
