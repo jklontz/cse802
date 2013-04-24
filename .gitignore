@@ -2,6 +2,7 @@
 test
 validation
 training
+images
 
 # TeX
 *.aux
